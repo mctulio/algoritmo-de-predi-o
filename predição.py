@@ -1,12 +1,11 @@
 #arquivo da planilha pré-carregado na pasta junto com o código e arquivo .exe.
 #o arquivo .exe é para aqueles que não utilizam python mas querem saber como o aplicativo funciona.
-
-
-
+#eu ainda to me aperfeiçoando em python, mas consigo ver um caminho promissor, o código ainda é bem primitivo, não reparem na bagunça!!
 
 import pandas as pd
 import numpy as np
-
+import tkinter as tk
+from tkinter import filedialog, messagebox
 
 def carregar_dados_excel(nome_arquivo):
     try:
@@ -44,13 +43,20 @@ def analisar_e_prever(df):
 
 
 if __name__ == "__main__":
-    nome_arquivo = "nome_do_arquivo.xlsx"
-    #Caso não consiga carregar o arquivo ou retornar um erro, utilize o parametro "r" antes das aspas do caminho do arquivo.
+    root = tk.Tk()
+    root.withdraw() 
     
-    df = carregar_dados_excel(nome_arquivo)
-    if df is not None:
-        numeros_previstos = analisar_e_prever(df)
+    nome_arquivo = filedialog.askopenfilename(title="Selecionar Arquivo Excel", filetypes=[("Excel Files", "*.xlsx;*.xls")])
+    
+    if nome_arquivo:
+        df = carregar_dados_excel(nome_arquivo)
         
-        if numeros_previstos is not None:
-            print("Possível previsão dos próximos números:")
-            print(', '.join(map(str, numeros_previstos)))
+        if df is not None:
+            numeros_previstos = analisar_e_prever(df)
+            
+            if numeros_previstos is not None:
+                resultado_str = "Possível previsão dos próximos números:\n" + ', '.join(map(str, numeros_previstos))
+                messagebox.showinfo("Resultado da Análise", resultado_str)
+
+
+
