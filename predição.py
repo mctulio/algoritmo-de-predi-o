@@ -1,3 +1,9 @@
+#arquivo da planilha pré-carregado na pasta junto com o código e arquivo .exe.
+#o arquivo .exe é para aqueles que não utilizam python mas querem saber como o aplicativo funciona.
+
+
+
+
 import pandas as pd
 import numpy as np
 
